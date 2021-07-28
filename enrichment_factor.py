@@ -3,7 +3,7 @@ This module calculates the enrichment factor for a given input map for transitio
 """
 
 import numpy as np
-
+import pandas as pd 
 
 def ef(luc, max_d, cdl, cd, N, omap, amap, mask, row, col):
     # Initialise a dictionary to track the composition of the neighbourhood of
@@ -192,5 +192,17 @@ def ef(luc, max_d, cdl, cd, N, omap, amap, mask, row, col):
                 if apl_count[p] > 0 and luc_count[q] > 0:
                     x = ef_sum[c, p, q]/apl_count[p]
                     y = float(luc_count[q])/sum(luc_count[:])
-                    enrichment_factors[c, p, q] = (x/y)
-    return enrichment_factors
+                    enrichment_factors[c, p, q] = round((x/y),3)
+    
+    df = pd.DataFrame(columns=list(range(0,luc))+['q','max_d'])
+    for c in range(0,max_d):
+        for q in range(0,luc):
+            new_record={}
+            for p in range(0,luc):
+                new_record[p]=enrichment_factors[c,q,p]
+            new_record['q']=q
+            new_record['max_d']=c
+            df = df.append(new_record,ignore_index=True)
+    
+        
+    return df

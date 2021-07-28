@@ -4,7 +4,8 @@ Conduct the coarse adjustment stage via structured sampling of meta-
 parameter values.
 """
 import sys 
-sys.setrecursionlimit(2000)
+
+sys.setrecursionlimit(5000)
 # Allows for multi-dimensional array handling.
 import numpy as np
 # Allows for maps to be stored as 2d arrays.

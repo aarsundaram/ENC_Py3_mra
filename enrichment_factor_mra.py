@@ -1,0 +1,87 @@
+from enrichment_factor import ef
+# Modules
+# Allows for multi-dimensional array handling.
+import sys
+import numpy as np
+np.set_printoptions(threshold=sys.maxsize)
+
+# Allows for maps to be stored as 2d arrays.
+from read_map import read_map
+# Determines the size (# of cells) of square neighbourhoods.
+from considered_distances import considered_distances
+import math
+
+base_path = "C:\\Users\\Gamelab\\Desktop\\RT\\Others\\Thesis\\Thesis_coding\\ABM\\ENC_Py3_release\\"
+# Set the case study
+case_study = "Amsterdam"
+# Set the paths to the directories and relevant data
+data_path = base_path + "EU_data\\" + case_study + "\\"
+output_path = base_path + "EU_output\\" + case_study + "\\"
+# Specify the original map (data at time slice 1).
+omap_path = data_path + case_study.lower() + "_1996.asc"
+# Specify the actual map (data at time slice 2).
+amap_path = data_path + case_study.lower() + "_2006.asc"
+# Specify the masking map.
+mask_path = data_path + case_study.lower() + "_mask.asc"
+# Set the land-use class names.
+luc_names = ["Outside", "Agriculture", "Greenhouses", "Mineral/Industry",
+             "Public Amenities", "Commercial", "Residential (L)",
+             "Residential (M)", "Residential (H)", "Recreation", "Nature",
+             "Water", "Water", "Transport", "Airport"]
+# Set the land-use class parameters: number of land-use classes, passive,
+# feature, and active.
+luc = len(luc_names)
+pas = 1
+fea = 6
+act = luc - (pas + fea)
+# Specify the maximum neighbourhood size distance considered
+max_distance = 8
+
+# Set the minimum required percentage of conversions.
+min_convo_rate = 0.025
+# Set the minimum required Enrichment Factor value at distance 1.
+min_EF_1 = 0.00
+# Set the significance limit (recommended value is 1.96
+z_limit = 1.96
+
+# Read in the map for time slice 1.
+omap = read_map(omap_path)
+# Read in the map for time slice 2.
+amap = read_map(amap_path)
+# Read in the masking map.
+mask = read_map(mask_path)
+# Analyse the input maps for evaluation purposes
+map_dimensions = np.shape(omap)
+rows = map_dimensions[0]
+cols = map_dimensions[1]
+
+# Determine the distances that will be analysed using the module considered
+# distances.
+temp = considered_distances(max_distance)
+# Store the list of considered distances as a variable.
+cd = temp[0]
+# Store the total number of distances considered
+cdl = temp[1]
+# Determine the maximum neighbourhood size (unit) from considered distances
+N_all = [1, 8, 12, 16, 32, 28, 40, 40, 20]
+N = []
+for c in range(0, max_distance):
+    N.append(N_all[c])
+
+
+
+
+enriched_factors = ef(luc, max_d=8, cdl=cdl, cd=cd, N=N, omap=omap, amap=amap, mask=mask, row=rows, col=cols)
+
+enriched_factors.to_csv(base_path+'enrichment_df.csv')
+#file = open(base_path+"enrichment_factors.txt", "w+")
+ 
+# Saving the array in a text file
+#content = str(enriched_factors)
+#file.write(content)
+#file.close()
+ 
+#print(enriched_factors)
+
+np.set_printoptions(threshold = False)
+
