@@ -3,7 +3,8 @@ Stage 3 of the Empirical Neighbourhood Calibration method:
 Conduct the coarse adjustment stage via structured sampling of meta-
 parameter values.
 """
-
+import sys 
+sys.setrecursionlimit(2000)
 # Allows for multi-dimensional array handling.
 import numpy as np
 # Allows for maps to be stored as 2d arrays.
@@ -33,7 +34,7 @@ import csv
 
 # Specify the base path to the directory containing the empirical neighbourhood
 # calibration tool-pack.
-base_path = "C:\\Users\\Gamelab\\Desktop\\RT\\Others\\Thesis\\Thesis_coding\\ABM\\ENC_Py3_release\\"
+base_path = "C:\\Users\\Gamelab\\Desktop\\RT\\Others\\Thesis\\Thesis_coding\\ABM\\ENC_Py3_mra\\"
 # Set the case study
 case_study = "Amsterdam"
 # Set the paths to the directories and relevant data

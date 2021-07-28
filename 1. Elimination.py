@@ -7,6 +7,7 @@ interactions.
 # Modules
 # Allows for multi-dimensional array handling.
 import numpy as np
+import gdal
 # Allows for maps to be stored as 2d arrays.
 from read_map import read_map
 # Determines the size (# of cells) of square neighbourhoods.
@@ -25,7 +26,7 @@ from contingency_table import contingency_table
 # calibration tool-pack.
 #base_path = "C:\\Users\\charl\OneDrive\\Documents\\ENC_Py3_release\\"
 
-base_path = "C:\\Users\\Gamelab\\Desktop\\RT\\Others\\Thesis\\Thesis_coding\\ABM\\ENC_Py3_release\\"
+base_path = "C:\\Users\\Gamelab\\Desktop\\RT\\Others\\Thesis\\Thesis_coding\\ABM\\ENC_Py3_mra\\"
 # Set the case study
 case_study = "Amsterdam"
 # Set the paths to the directories and relevant data
@@ -41,7 +42,7 @@ mask_path = data_path + case_study.lower() + "_mask.asc"
 luc_names = ["Outside", "Agriculture", "Greenhouses", "Mineral/Industry",
              "Public Amenities", "Commercial", "Residential (L)",
              "Residential (M)", "Residential (H)", "Recreation", "Nature",
-             "Water", "Water", "Transport", "Airport"]
+             "Water", "Transport", "Airport"]
 # Set the land-use class parameters: number of land-use classes, passive,
 # feature, and active.
 luc = len(luc_names)
