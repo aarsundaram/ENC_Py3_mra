@@ -4,6 +4,7 @@ Generates the contingency table for 2 input maps.
 
 import numpy as np
 
+
 # Allows for maps to be stored as 2d arrays.
 from read_map import read_map
 # Determines the size (# of cells) of square neighbourhoods.
@@ -36,6 +37,7 @@ amap = read_map(amap_path)
 mask = read_map(mask_path)
 # Analyse the input maps for evaluation purposes
 map_dimensions = np.shape(omap)
+
 rows = map_dimensions[0]
 cols = map_dimensions[1]
 
@@ -66,15 +68,14 @@ def contingency_table(omap, amap, mask, luc, rows, cols):
         cont_table[luc, luc] = cont_table[luc, luc] + x
     return cont_table
 
- #   cont_table.to_csv(base_path+'cont_table.csv')
+    cont_table.to_csv(base_path+'cont_table.csv')
 
- #   file = open(base_path+"cont_table.txt", "w+")
+file = open(base_path+"cont_table.txt", "w+")
+#  Saving the array in a text file
+    content = str(cont_table)
+    file.write(content)
+    file.close()
  
-  #  Saving the array in a text file
-  #  content = str(cont_table)
- #   file.write(content)
-  #  file.close()
- 
-   # print(cont_table)
+print(cont_table)
 
-   # np.set_printoptions(threshold = False)
+np.set_printoptions(threshold = False)
