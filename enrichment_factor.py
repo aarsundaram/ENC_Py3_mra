@@ -186,6 +186,11 @@ def ef(luc, max_d, cdl, cd, N, omap, amap, mask, row, col):
                                     )
     # Calculate the enrichment factor values per unit distance.
     enrichment_factors = np.zeros(shape=(max_d, luc, luc))
+    luc_names = ["Outside", "Agriculture", "Greenhouses", "Mineral/Industry",
+             "Public Amenities", "Commercial", "Residential (L)",
+             "Residential (M)", "Residential (H)", "Recreation", "Nature",
+             "Water", "Transport", "Airport"]
+
     for p in range(0, luc):
         for q in range(0, luc):
             for c in range(0, max_d):
@@ -194,12 +199,12 @@ def ef(luc, max_d, cdl, cd, N, omap, amap, mask, row, col):
                     y = float(luc_count[q])/sum(luc_count[:])
                     enrichment_factors[c, p, q] = round((x/y),3)
     
-    df = pd.DataFrame(columns=list(range(0,luc))+['q','max_d'])
+    df = pd.DataFrame(columns=luc_names+['q','max_d'])
     for c in range(0,max_d):
         for q in range(0,luc):
             new_record={}
             for p in range(0,luc):
-                new_record[p]=enrichment_factors[c,q,p]
+                new_record[luc_names[p]]=enrichment_factors[c,q,p]
             new_record['q']=q
             new_record['max_d']=c
             df = df.append(new_record,ignore_index=True)

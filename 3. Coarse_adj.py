@@ -77,7 +77,7 @@ luc_names = ["Outside", "Agriculture", "Greenhouses", "Mineral/Industry",
 # feature, and active.
 luc = len(luc_names)
 pas = 1
-fea = 6
+fea = 3
 act = luc - (pas + fea)
 # Specify the maximum neighbourhood size distance considered
 max_distance = 8

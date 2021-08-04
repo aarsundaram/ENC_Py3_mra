@@ -41,12 +41,12 @@ mask_path = data_path + case_study.lower() + "_mask.asc"
 luc_names = ["Outside", "Agriculture", "Greenhouses", "Mineral/Industry",
              "Public Amenities", "Commercial", "Residential (L)",
              "Residential (M)", "Residential (H)", "Recreation", "Nature",
-             "Water", "Water", "Transport", "Airport"]
+             "Water", "Transport", "Airport"]
 # Set the land-use class parameters: number of land-use classes, passive,
 # feature, and active.
 luc = len(luc_names)
 pas = 1
-fea = 6
+fea = 3
 act = luc - (pas + fea)
 # Specify the maximum neighbourhood size distance considered
 max_distance = 8
