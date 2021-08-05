@@ -18,7 +18,7 @@ case_study = "Amsterdam"
 data_path = base_path + "EU_data\\" + case_study + "\\"
 output_path = base_path + "EU_output\\" + case_study + "\\"
 # Specify the original map (data at time slice 1).
-omap_path = data_path + case_study.lower() + "_1996.asc"
+omap_path = data_path + case_study.lower() + "_2006_run1.asc"
 # Specify the actual map (data at time slice 2).
 amap_path = data_path + case_study.lower() + "_2006.asc"
 # Specify the masking map.
@@ -73,15 +73,7 @@ for c in range(0, max_distance):
 
 enriched_factors = ef(luc, max_d=8, cdl=cdl, cd=cd, N=N, omap=omap, amap=amap, mask=mask, row=rows, col=cols)
 
-enriched_factors.to_csv(base_path+'enrichment_df.csv')
-#file = open(base_path+"enrichment_factors.txt", "w+")
- 
-# Saving the array in a text file
-#content = str(enriched_factors)
-#file.write(content)
-#file.close()
- 
-#print(enriched_factors)
+enriched_factors.to_csv(output_path+'enrichment_df_run1.csv')
 
 np.set_printoptions(threshold = False)
 
