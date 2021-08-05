@@ -4,6 +4,7 @@ This module calculates the enrichment factor for a given input map for transitio
 
 import numpy as np
 import pandas as pd 
+import math 
 
 def ef(luc, max_d, cdl, cd, N, omap, amap, mask, row, col):
     # Initialise a dictionary to track the composition of the neighbourhood of
@@ -186,7 +187,7 @@ def ef(luc, max_d, cdl, cd, N, omap, amap, mask, row, col):
                                     )
     # Calculate the enrichment factor values per unit distance.
     enrichment_factors = np.zeros(shape=(max_d, luc, luc))
-    luc_names = ["Outside", "Agriculture", "Greenhouses", "Mineral/Industry",
+    luc_names = ["Outside","Agriculture", "Greenhouses", "Mineral/Industry",
              "Public Amenities", "Commercial", "Residential (L)",
              "Residential (M)", "Residential (H)", "Recreation", "Nature",
              "Water", "Transport", "Airport"]
@@ -197,7 +198,11 @@ def ef(luc, max_d, cdl, cd, N, omap, amap, mask, row, col):
                 if apl_count[p] > 0 and luc_count[q] > 0:
                     x = ef_sum[c, p, q]/apl_count[p]
                     y = float(luc_count[q])/sum(luc_count[:])
-                    enrichment_factors[c, p, q] = round((x/y),3)
+                    er_value = round((x/y),3)
+                    if er_value > 0 :
+                        enrichment_factors[c, p, q] = math.log10(er_value)
+                    else:
+                        enrichment_factors[c, p, q] = 0 
     
     df = pd.DataFrame(columns=luc_names+['q','max_d'])
     for c in range(0,max_d):

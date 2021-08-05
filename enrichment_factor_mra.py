@@ -11,7 +11,7 @@ from read_map import read_map
 from considered_distances import considered_distances
 import math
 
-base_path = "C:\\Users\\Gamelab\\Desktop\\RT\\Others\\Thesis\\Thesis_coding\\ABM\\ENC_Py3_release\\"
+base_path = "C:\\Users\\Gamelab\\Desktop\\RT\\Others\\Thesis\\Thesis_coding\\ABM\\ENC_Py3_mra\\"
 # Set the case study
 case_study = "Amsterdam"
 # Set the paths to the directories and relevant data
@@ -24,7 +24,7 @@ amap_path = data_path + case_study.lower() + "_2006.asc"
 # Specify the masking map.
 mask_path = data_path + case_study.lower() + "_mask.asc"
 # Set the land-use class names.
-luc_names = ["Outside", "Agriculture", "Greenhouses", "Mineral/Industry",
+luc_names = ["Outside","Agriculture", "Greenhouses", "Mineral/Industry",
              "Public Amenities", "Commercial", "Residential (L)",
              "Residential (M)", "Residential (H)", "Recreation", "Nature",
              "Water", "Transport", "Airport"]
