@@ -2,6 +2,7 @@
 Generates the contingency table for 2 input maps.
 """
 
+import pandas as pd
 import numpy as np
 # Allows for maps to be stored as 2d arrays.
 from read_map import read_map
@@ -67,15 +68,16 @@ def contingency_table(omap, amap, mask, luc, rows, cols):
     return cont_table
 
 cont_table = contingency_table(omap, amap, mask, luc, rows, cols)
+pd.DataFrame(cont_table).to_csv("cont_table.csv")
 #cont_table.to_csv(base_path+'cont_table.csv')
 
 np.savetxt("cont_table.csv", cont_table, delimiter=",")
 
-#file = open(base_path+"cont_table.txt", "w+")
-#  Saving the array in a text file
-#content = str(cont_table)
-#file.write(content)
-#file.close()
+file = open(base_path+"cont_table.txt", "w+")
+#Saving the array in a text file
+content = str(cont_table)
+file.write(content)
+file.close()
  
-#print(cont_table)
-#np.set_printoptions(threshold = False)
+print(cont_table)
+np.set_printoptions(threshold = False)
