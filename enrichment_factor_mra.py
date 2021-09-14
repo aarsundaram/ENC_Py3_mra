@@ -73,7 +73,7 @@ for c in range(0, max_distance):
 
 enriched_factors = ef(luc, max_d=8, cdl=cdl, cd=cd, N=N, omap=omap, amap=amap, mask=mask, row=rows, col=cols)
 
-enriched_factors.to_csv(output_path+'enrichment_df_run_sept06.csv')
+enriched_factors.to_csv(output_path+'enrichment_df_run_sept14.csv')
 
 np.set_printoptions(threshold = False)
 
